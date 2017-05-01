@@ -1,0 +1,131 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+body > div {
+  box-sizing: border-box;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.use-tree .grid {
+  display: none;
+}
+
+.use-treegrid .tree {
+  display: none;
+}
+
+td {
+  white-space: nowrap;
+  vertical-align: top;
+  padding: 0 5px;
+}
+
+th {
+  text-align: left;
+}
+
+fieldset {
+  height: 100%;
+  box-sizing: border-box;
+  min-width: 1px;
+  overflow: auto;
+}
+
+#left {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+#node-section {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 65%;
+}
+
+#props-section {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 100%;
+  width: 30%;
+  padding-right: 10px;
+}
+
+#event-section {
+  height: 35%;
+  position: relative;
+}
+
+.fancytree-container {
+  overflow: auto;
+  outline: 0;  /* Confusingly redundant with focus on specific line item */
+  border: 0 !important; /* We create our own border on the parent*/
+}
+
+.fancytree-treefocus {
+  /* Focus rules can go here */
+}
+
+.grid {
+  display: block;
+}
+
+.fancytree-ext-table tr, .fancytree-ext-table td {
+  outline: 0px solid white;
+}
+
+/* ---- Theme overrides ---- */
+/* Remove confusing background-color hover effect by recoding background css */
+.fancytree-ext-table > tbody > tr {
+  background: none !important;
+}
+.fancytree-ext-table > tbody > tr.fancytree-active {
+  background-color: hsl(202, 73%, 96%) !important; /* light blue */
+}
+/* Remove extra confusing outlines when item doesn't have focus */
+.fancytree-ext-table:not(:focus) > tbody > .fancytree-active,
+.fancytree-ext-table:not(:focus) > tbody > .fancytree-active > td,
+.fancytree-ext-table:not(:focus) > tbody > .fancytree-active > td span
+{
+  outline: 0 !important;
+}
+
+.fancytree-selected {
+  background-color: hsl(0, 100%, 95%) !important;
+}
+.fancytree-ext-table:focus > tbody > tr.fancytree-active {
+  background-color: #CBE8F6 !important;
+}
+
+.highlight {
+  transition: background-color 500ms;
+  background-color: hsl(0, 100%, 95%) !important;
+}
+
+/* ---- Search overrides ---- */
+.fancytree-ext-filter tr.fancytree-submatch:not(.fancytree-match),
+.fancytree-ext-filter tr.fancytree-submatch:not(.fancytree-match)
+  span,
+.fancytree-ext-filter tr.fancytree-submatch:not(.fancytree-match)
+  td,
+.fancytree-ext-filter tr.fancytree-submatch:not(.fancytree-match)
+  .name-undefined:after  {
+  color: silver !important;
+}
+
+.fancytree-ext-filter tr.fancytree-hide,
+.fancytree-ext-filter tr.fancytree-hide span,
+.fancytree-ext-filter tr.fancytree-hide td,
+.fancytree-ext-filter tr.fancytree-hide .name-undefined:after {
+  color: silver !important;
+}
+
+.fancytree-match .fancytree-title {
+  font-weight: normal !important;
+}

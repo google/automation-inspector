@@ -1,0 +1,26 @@
+#event-filter-num-matches {
+  margin-left: 3ch;
+}
+
+#event-filter-input {
+  width: 50ch;
+}
+
+#event-play-pause {
+  width: 3.5ch;
+}
+
+.event {
+  background-color: #080880;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 5px;
+  text-align: center;
+}
+
+/* Dim when not matched during a search */
+.fancytree-hide .event {
+  opacity: .6;
+}
+

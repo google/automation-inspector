@@ -1,0 +1,7 @@
+#props-tree {
+  display: block; /* Ensure visible even when other trees are tree-grids */
+}
+
+.was {
+  color: brown;
+}

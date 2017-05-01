@@ -1,0 +1,34 @@
+#node-filter-input {
+  width: 50ch;
+}
+
+.role {
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  width: 15ex;
+  text-align: center;
+}
+
+.state {
+  background-color: orange;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 5px;
+  text-align: center;
+}
+
+/* Dim when not matched during a search */
+.fancytree-hide .role,
+.fancytree-hide .state {
+  opacity: .6;
+}
+
+.name-undefined:after {
+  content: '<empty>';
+  font-size: 90%;
+  color: brown;
+}
+
