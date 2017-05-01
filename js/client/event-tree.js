@@ -217,8 +217,6 @@ class EventTree extends Tree {
           '  ' + event.node.name;
   }
 
-
-
   toTreeData(event) {
     return {
       title: this.formatTitleForTreeGrid(event),
@@ -227,6 +225,8 @@ class EventTree extends Tree {
     };
   }
 
+  // Using selection mechnism to colorize related events ot given
+  // automation node
   selectAllEventsForAutomationNode(automationNodeKey) {
     this.getViewRootNode().visit((eventNode) => {
       const eventData = eventNode.data.automationData;
