@@ -30,7 +30,7 @@ module.exports = function(grunt) {
   const BOWER_OPTIONS = {
     keepExpandedHierarchy: false,
     packageSpecific: {
-      'fancytree-fast-addChildren': {
+      'fancytree': {
         files: [
           'dist/src/jquery.fancytree.js',
           'dist/src/jquery.fancytree.filter.js',
