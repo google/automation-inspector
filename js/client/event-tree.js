@@ -45,106 +45,22 @@ class EventTree extends Tree {
       extensions: EXTENSIONS, // Column view makes things easier to read
       source: [ ],  // No events yet
       // Use only in treegrid mode
-      renderColumns: (event, data) => {
-        const node = data.node,
-          $tdList = $(node.tr).find('>td'),
-          automationData = node.data.automationData;
-
-        const applyFilter = (node, isParent) => {
-          const isMatch = !this.filterFn || this.filterFn(node);
-          node.match = isMatch;
-          const matchClasses = isParent ? 'fancytree-match fancytree-submatch' :
-            'fancytree-match';
-          $(node.tr)
-            .toggleClass(matchClasses, isMatch)
-            .toggleClass('fancytree-hide', !isMatch);
-        };
-
-        // After first item logged, automatically apply current
-        // filter to new items
-        // This is much better than using the filter extension's autoApply
-        // which applies to the entire tree on each append!
-        applyFilter(node, true);
-        if (node.children) {
-          node.children.forEach(applyFilter);
-        }
-
-        if (!automationData || automationData.isSummary) {
-          // Summary event
-          $tdList.eq(0)
-            .attr('colspan', $tdList.length)
-            .nextAll().remove();
-          return;
-        }
-
-        // (Column #0 is rendered by fancytree adding the title)
-
-        // Column 1: role
-        $tdList.eq(1)
-          .text(automationData.node.role);
-        // Column 2: state
-        $tdList.eq(2)
-          .text(Tree.formatStateForTreeGrid(automationData.node.state));
-
-        // Column 3: name
-        const name = automationData.node.name;
-        if (typeof name === 'undefined') {
-          // Show difference between undefined and ''
-          $tdList.eq(3)
-            .text('')
-            .addClass('name-undefined');
-        }
-        else {
-          $tdList.eq(3)
-            .text(name);
-        }
-      },
-      activate: (event, data) => {
-        // When an event is activated, activate the corresponding node
-        // for the event in the node tree
-        const node = data.node,
-          automationData = node.data.automationData;
-
-        // TODO this is a bit spaghetti-ish, we should probably
-        // have an event that fires and is listened to. This code shouldn't
-        // know about the node tree.
-        window.nodeTree.clearHighlights();
-
-        if (!automationData || automationData.isSummary) {
-          // No related node information available
-          this.selectAllEventsForAutomationNode(-1);  // Deselect all
-          return;
-        }
-
-        // Highlight useful information in other panels, related to event
-        const automationNode = automationData.node;
-        const automationNodeKey = automationNode.key;
-        // Show the current automation node in the automation node tree,
-        // expanding parents if necessary
-        window.nodeTree.activate(automationNodeKey,
-          { noEvents: true });
-        // Show the properties for the current node in the property view
-        window.propsTree.showProps(automationNode, ' (event data)');
-        // Highlight related events
-        this.selectAllEventsForAutomationNode(automationNodeKey);
-        // Highlight related property changes for nodeChanged tree changes
-        window.nodeTree.highlightNodeDiff(automationNode,
-          automationData.diff, true);
-      }
+      renderColumns: (event, data) => this.renderColumns(data.node),
+      activate: (event, data) => this.onActivate(data.node.data.automationData)
+      // Other options we aren't currenly using:
+      // --------------------------------------------------------------------
+      // Re-apply last filter if lazy data is loaded
+      // Too expensive when there are many events. We do this manually
+      // on new events as they come in via renderColumns#applyFilter()
+      // treeOptions.filter.autoApply = true;
+      // --------------------------------------------------------------------
+      // Auto expand found events
+      // Too expensive and noisy as filter runs on newly logged items.
+      // On pages like nytimes.com this causes too much processing
+      // as we are flooded with tens of thousands of mutation events.
+      // treeOptions.filter.autoExpand = false;
+      // --------------------------------------------------------------------
     });
-
-    // --------------------------------------------------------------------
-    // Re-apply last filter if lazy data is loaded
-    // Too expensive when there are many events. We do this manually
-    // on new events as they come in via renderColumns#applyFilter()
-    // treeOptions.filter.autoApply = true;
-    // --------------------------------------------------------------------
-    // Auto expand found events
-    // Too expensive and noisy as filter runs on newly logged items.
-    // On pages like nytimes.com this causes too much processing
-    // as we are flooded with tens of thousands of mutation events.
-    // treeOptions.filter.autoExpand = false;
-    // --------------------------------------------------------------------
 
     this.finalize($container, treeOptions);
 
@@ -157,6 +73,90 @@ class EventTree extends Tree {
     // - Pause mode -- save all events until play mode is on again
     // - Grouping events that occurred at the same time together
     this.batchedEvents = [];
+  }
+
+  renderColumns(viewNode) {
+    const $tdList = $(viewNode.tr).find('>td'),
+      automationData = viewNode.data.automationData;
+
+    const applyFilter = (node, isParent) => {
+      const isMatch = !this.filterFn || this.filterFn(node);
+      node.match = isMatch;
+      const matchClasses = isParent ? 'fancytree-match fancytree-submatch' :
+        'fancytree-match';
+      $(node.tr)
+        .toggleClass(matchClasses, isMatch)
+        .toggleClass('fancytree-hide', !isMatch);
+    };
+
+    // After first item logged, automatically apply current
+    // filter to new items
+    // This is much better than using the filter extension's autoApply
+    // which applies to the entire tree on each append!
+    applyFilter(viewNode, true);
+    if (viewNode.children) {
+      viewNode.children.forEach(applyFilter);
+    }
+
+    if (!automationData || automationData.isSummary) {
+      // Summary event
+      $tdList.eq(0)
+        .attr('colspan', $tdList.length)
+        .nextAll().remove();
+      return;
+    }
+
+    // (Column #0 is rendered by fancytree adding the title)
+
+    // Column 1: role
+    $tdList.eq(1)
+      .text(automationData.node.role);
+    // Column 2: state
+    $tdList.eq(2)
+      .text(Tree.formatStateForTreeGrid(automationData.node.state));
+
+    // Column 3: name
+    const name = automationData.node.name;
+    if (typeof name === 'undefined') {
+      // Show difference between undefined and ''
+      $tdList.eq(3)
+        .text('')
+        .addClass('name-undefined');
+    }
+    else {
+      $tdList.eq(3)
+        .text(name);
+    }
+  }
+
+  onActivate(automationData) {
+    // When an event is activated, activate the corresponding node
+    // for the event in the node tree
+    // TODO this is a bit spaghetti-ish, we should probably
+    // have an event that fires and is listened to. This code shouldn't
+    // know about the node tree.
+    window.nodeTree.clearHighlights();
+
+    if (!automationData || automationData.isSummary) {
+      // No related node information available
+      this.selectAllEventsForAutomationNode(-1);  // Deselect all
+      return;
+    }
+
+    // Highlight useful information in other panels, related to event
+    const automationNode = automationData.node;
+    const automationNodeKey = automationNode.key;
+    // Show the current automation node in the automation node tree,
+    // expanding parents if necessary
+    window.nodeTree.activate(automationNodeKey,
+      { noEvents: true });
+    // Show the properties for the current node in the property view
+    window.propsTree.showProps(automationNode, ' (event data)');
+    // Highlight related events
+    this.selectAllEventsForAutomationNode(automationNodeKey);
+    // Highlight related property changes for nodeChanged tree changes
+    window.nodeTree.highlightNodeDiff(automationNode,
+      automationData.diff, true);
   }
 
   initToolbar() {
