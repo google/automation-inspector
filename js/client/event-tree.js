@@ -34,7 +34,7 @@ class EventTree extends Tree {
 
   init() {
     this.ID_PREFIX = 'ev_';
-    this.MAX_LOG_GROUPS = 20;
+    this.MAX_LOG_GROUPS = 100;
     this.logCounter = 0;
 
     const EXTENSIONS = ['filter', 'table'];
