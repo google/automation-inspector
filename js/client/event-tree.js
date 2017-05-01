@@ -27,16 +27,18 @@ class EventTree extends Tree {
     );
   }
 
-  init(options) {
+  constructor() {
+    super();
+    this.initAutomationEventListener();
+  }
 
+  init() {
     this.ID_PREFIX = 'ev_';
-    this.useTreeGrid = options.useTreeGrid;
     this.MAX_LOG_GROUPS = 20;
     this.logCounter = 0;
 
-    const EXTENSIONS = ['filter'].concat(options.useTreeGrid ? [ 'table' ]: []);
-    const CONTAINER_ID = options.useTreeGrid ? '#event-treegrid' :
-      '#event-tree';
+    const EXTENSIONS = ['filter', 'table'];
+    const CONTAINER_ID = '#event-treegrid';
     const $container = $(CONTAINER_ID);
     const treeOptions = $.extend(this.DEFAULT_TREE_OPTIONS, {
       idPrefix: this.ID_PREFIX,
@@ -146,8 +148,6 @@ class EventTree extends Tree {
 
     this.finalize($container, treeOptions);
 
-    this.initAutomationEventListener();
-
     this.initToolbar();
 
     /* global EventFilter */
@@ -211,13 +211,6 @@ class EventTree extends Tree {
     return this.formatEventType(event);
   }
 
-  formatTitleForTree(event) {
-    return '<span class="event">' + this.formatEventType(event) +
-      '</span> <span class="role">' + event.node.role +
-      '</span> ' + Tree.formatStateForTree(event.node.state) +
-      ' ' + event.node.name;
-  }
-
   getTextForSearch(event) {
     return this.formatEventType(event) + '  ' + event.node.role + '  ' +
        Tree.getStateText(event.node.state) +
@@ -228,8 +221,7 @@ class EventTree extends Tree {
 
   toTreeData(event) {
     return {
-      title: this.useTreeGrid ? this.formatTitleForTreeGrid(event) :
-        this.formatTitleForTree(event),
+      title: this.formatTitleForTreeGrid(event),
       automationData: event,
       key: event.key
     };

@@ -109,13 +109,8 @@ class Tree {
     };
 
     const onDocumentReady = () => {
-      Promise.all([
-        window.client.getOptions(),
-        window.client.getRootAutomationNode()
-      ])
-      .then(([options, root]) => {
-        this.init(options, root);
-      });
+      window.client.getRootAutomationNode()
+      .then((rootNode) => this.init(rootNode));
     };
 
     $(document).ready(onDocumentReady);

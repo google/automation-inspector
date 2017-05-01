@@ -21,7 +21,6 @@
 
 class PropsTree extends Tree {
   init() {
-
     this.ID_PREFIX = 'pr_';
 
     const CONTAINER_ID = '#props-tree';

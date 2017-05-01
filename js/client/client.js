@@ -29,7 +29,6 @@ class Client {
     if (chrome.runtime.lastError) {
       console.error(chrome.runtime.lastError);
     }
-    this.getRootAutomationNode();
   }
 
   // A number for a known tab id (extension) or null
@@ -52,28 +51,6 @@ class Client {
       }
     }
     return this.query;
-  }
-
-  // Get the options
-  // TODO Allow options to be changed
-  // TODO Remember state of checkboxes in UI
-  getOptions() {
-    if (!this.getOptions.prom) {
-      this.getOptions.prom = new Promise((resolve) => {
-        chrome.storage.sync.get('useTreeGrid', (options) => {
-          if (chrome.runtime.lastError) {
-            console.error(chrome.runtime.lastError);
-            options = {};
-          }
-          // For debugging:
-          // TODO expose user option
-          options.useTreeGrid = true; // Test
-          this.options = options;
-          resolve(options);
-        });
-      });
-    }
-    return this.getOptions.prom;
   }
 
   addPortListener(message, callback) {
@@ -125,11 +102,6 @@ class Client {
 }
 
 window.client = new Client();
-
-window.client.getOptions()
-  .then((options) => {
-    $('html').addClass(options.useTreeGrid ? 'use-treegrid' : 'use-tree');
-  });
 
 window.addEventListener('unhandledrejection', (err) => {
   console.error(err);

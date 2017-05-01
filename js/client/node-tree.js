@@ -20,13 +20,12 @@
 // The tree of automation nodes, utilizing lazy loading for better performatnce
 
 class NodeTree extends Tree {
-  init(options, rootAutomationNode) {
-    this.options = options;
+  init(rootAutomationNode) {
     this.ID_PREFIX = 'nd_';
     this.ERROR_NO_DATA = 'Error: no data';
 
-    const EXTENSIONS = ['filter'].concat(options.useTreeGrid ? [ 'table' ] : []);
-    const CONTAINER_ID = options.useTreeGrid ? '#node-treegrid' : '#node-tree';
+    const EXTENSIONS = ['filter', 'table'];
+    const CONTAINER_ID = '#node-treegrid';
     const $container = $(CONTAINER_ID);
     const treeOptions = $.extend(this.DEFAULT_TREE_OPTIONS, {
       idPrefix: this.ID_PREFIX,
@@ -101,15 +100,6 @@ class NodeTree extends Tree {
     return node ? node.role : this.ERROR_NO_DATA;
   }
 
-  formatTitleForTree(node) {
-    let line = '<span class="role">' + node.role + '</span> ' +
-      Tree.formatStateForTree(node.state);
-    if (node.name)
-      return line + ' ' + node.name;
-    else
-      return line;  // No name
-  }
-
   // Optional cell num to flash individual cell, otherwise flashes entire row
   highlight(key, cellNum, fadeMs) {
     const row = this.getRowElement(key),
@@ -157,8 +147,7 @@ class NodeTree extends Tree {
       return { title: this.ERROR_NO_DATA };
     }
     return {
-      title: this.options.useTreeGrid ? this.formatTitleForTreeGrid(node) :
-        this.formatTitleForTree(node),
+      title: this.formatTitleForTreeGrid(node),
       automationData: node,
       key: node.key,
       lazy: node.children && node.children.length > 0

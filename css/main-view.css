@@ -30,14 +30,6 @@ body > div {
   padding-bottom: 10px;
 }
 
-.use-tree .grid {
-  display: none;
-}
-
-.use-treegrid .tree {
-  display: none;
-}
-
 td {
   white-space: nowrap;
   vertical-align: top;
