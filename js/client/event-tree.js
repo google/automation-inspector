@@ -117,8 +117,8 @@ class EventTree extends Tree {
         }
 
         // Highlight useful information in other panels, related to event
-        const automationNode =  automationData.node;
-        const automationNodeKey =automationNode.key;
+        const automationNode = automationData.node;
+        const automationNodeKey = automationNode.key;
         // Show the current automation node in the automation node tree,
         // expanding parents if necessary
         window.nodeTree.activate(automationNodeKey,
