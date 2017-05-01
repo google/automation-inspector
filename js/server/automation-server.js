@@ -55,13 +55,16 @@ chrome.runtime.onConnect.addListener((port) => {
 
   port.onDisconnect.addListener(() => onPortDisconnect(tabId));
   port.onMessage.addListener(onPortMessage);
+
   console.info('Connected to automation client with tab id = ' + tabId);
 
   const automationTree = new AutomationTree(port, tabId);
-  automationTree.init((rootNode) => {
+  automationTree.init()
+  .then((response) => {
     if (portToTreeMap.size === 0) {
       onFirstConnectionAdded();
     }
+    const rootNode = response;
     portToTreeMap.set(tabId, automationTree);
     rootToTreeMap.set(rootNode, automationTree);
     const rootNodeData = automationTree.getNodeData(rootNode);
@@ -74,6 +77,13 @@ chrome.runtime.onConnect.addListener((port) => {
       rootNode: rootNodeData,
       allStates,
       allRoles
+    });
+  })
+  .catch((error) => {
+    port.postMessage({
+      message: 'error',
+      tab: tabId,
+      error: error.toString()
     });
   });
 });

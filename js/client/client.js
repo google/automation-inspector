@@ -21,6 +21,9 @@
 
 class Client {
   constructor() {
+    // Promise failure handling
+    window.addEventListener('unhandledrejection', this.onError);
+
     // Connect to automation server so that we can listen to events
     this.port = chrome.runtime.connect( {
       // We can only provide arguments to connect in the name string
@@ -29,6 +32,12 @@ class Client {
     if (chrome.runtime.lastError) {
       console.error(chrome.runtime.lastError);
     }
+    this.addPortListener('error', (response) => this.onError(response.error));
+  }
+
+  onError(err) {
+    console.error(JSON.stringify(err));
+    window.alert(JSON.stringify(err));
   }
 
   // A number for a known tab id (extension) or null
@@ -74,6 +83,9 @@ class Client {
         if (chrome.runtime.lastError) {
           throw new Error(JSON.stringify(chrome.runtime.lastError));
         }
+        if (result.error) {
+          throw new Error(result.error);
+        }
         resolve(result);
       });
     });
@@ -103,7 +115,4 @@ class Client {
 
 window.client = new Client();
 
-window.addEventListener('unhandledrejection', (err) => {
-  console.error(err);
-});
 

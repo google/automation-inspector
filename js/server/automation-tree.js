@@ -33,12 +33,13 @@ class AutomationTree {
     this.tabId = tabId;
   }
 
-  init(callback) {
+  init() {
     const initTreeForTab = (callback) => {
       chrome.automation.getTree(this.tabId, (rootNode) => {
         if (chrome.runtime.lastError) {
           // Show error
           console.error(chrome.runtime.lastError);
+          callback({ error: chrome.runtime.lastError });
         }
         else {
           callback(rootNode);
@@ -66,18 +67,26 @@ class AutomationTree {
       }
     };
 
-    // Already initialized?
-    if (this.rootNode) {
-      callback(this.rootNode);
-      return;
-    }
+    return new Promise((resolve) => {
+      // Already initialized?
+      if (this.rootNode) {
+        return this.rootNode;
+      }
 
-    // First time
-    return initTree((rootNode) => {
-      this.rootNode = rootNode;
-      this.allAutomationNodeProps = this.getAllPropertyNames(rootNode);
-      this.addEventListeners();
-      callback(rootNode);
+      if (!chrome.automation) {
+        throw new Error(
+          'Automation Inspector could not find the automation API. ' +
+            'Try running on Canary or a developer channel build.'
+        );
+      }
+
+      // First time
+      initTree((rootNode) => {
+        this.rootNode = rootNode;
+        this.allAutomationNodeProps = this.getAllPropertyNames(rootNode);
+        this.addEventListeners();
+        resolve(rootNode);
+      });
     });
   }
 

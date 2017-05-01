@@ -79,10 +79,6 @@ fieldset {
   border: 0 !important; /* We create our own border on the parent*/
 }
 
-.fancytree-treefocus {
-  /* Focus rules can go here */
-}
-
 .grid {
   display: block;
 }
