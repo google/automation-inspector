@@ -15,6 +15,9 @@
  * limitations under the License.
  */
 
+// The tree view for events. A tree view is used so that the noisy event
+// stream can be grouped into related events
+
 /*global Tree*/
 
 class EventTree extends Tree {

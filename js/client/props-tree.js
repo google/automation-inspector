@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+// The property view tree, which groups similar properties for convenience
+
 /*global Tree*/
 
 class PropsTree extends Tree {

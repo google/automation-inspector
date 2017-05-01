@@ -15,6 +15,10 @@
  * limitations under the License.
  */
 
+// This object tracks one automation tree.
+// For the extension, there is one tree per tab
+// For the app, there is one tree for the entire desktop
+
 /* exported AutomationTree */
 
 class AutomationTree {

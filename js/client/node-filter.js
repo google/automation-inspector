@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+// The node filter that supports 4 types of filtering:
+// - JSON object for automation search
+// - $() search format e.g. $(#foo) to search for that item
+// - plain text to search visible text in the node tree
+// - regex to search visible text in the node tree
+
 /* exported NodeFilter */
 /* global Filter */
 

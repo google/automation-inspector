@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 
-// This background script acts as a server of automation data */
+// This background script acts as a server of automation data. It responds
+// to requests for node information and notifies the client of events.
 
 /* global AutomationTree */
 

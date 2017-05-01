@@ -17,6 +17,8 @@
 
 /*global Tree*/
 
+// The tree of automation nodes, utilizing lazy loading for better performatnce
+
 class NodeTree extends Tree {
   init(options, rootAutomationNode) {
     this.options = options;

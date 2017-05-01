@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+// Common code for the node and event filters
+
 // Base class for filters
 /* exported Filter */
 

@@ -15,7 +15,10 @@
  * limitations under the License.
  */
 
-// Manage options and communication with server (background-script)
+// Manage configuration
+// Manage communication with automation-server (background-script that
+// provides information about automation nodes and events)
+
 class Client {
   constructor() {
     // Connect to automation server so that we can listen to events

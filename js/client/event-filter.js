@@ -15,6 +15,11 @@
  * limitations under the License.
  */
 
+// Implement the filter field for the event pane, supporting:
+// - plain text to search visible text in the node tree
+// - regex to search visible text in the node tree
+
+
 /* exported EventFilter */
 /* global Filter */
 
