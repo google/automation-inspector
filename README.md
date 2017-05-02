@@ -2,10 +2,20 @@
 An inspection tool for Chrome Automation API
 
 The [Chrome Automation API](https://developer.chrome.com/extensions/automation)
-is an experimental API currently available only on the dev channel and to
-internal assistive technologies such as ChromeVox.
+is an experimental accessibility API that allows developers to access the
+automation tree and events for the browser. The tree resembles the DOM tree,
+but only exposes the semantic structure of a page. It can be used to
+programmatically interact with a page by examining names, roles, and states,
+listening for events, and performing actions on nodes.
 
-Automation Inspector can be used to exercise the Automation API, to inspect the
+One of Chrome Automation's main purposes is to enable the development of
+assistive technologies written in JavaScript, for Chrome OS. This is similar to
+how MSAA, IA2 and  UIA are used on Windows, and AX Accessibility is used for
+OS X. It can also be used by extensions, but because it is experimental, it
+is currently available only on the dev channel and to internal assistive
+technologies such as ChromeVox.
+
+Automation Inspector is used to exercise the Automation API, to inspect the
 entire Chrome OS desktop, or to inspect a specific browser tab.
 
 This tool is mainly useful for the following types of people:
