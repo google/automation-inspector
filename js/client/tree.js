@@ -32,7 +32,7 @@
 // TODO - P2: resizable panels ala https://codepen.io/rstrahl/pen/eJZQej
 // TODO - P2: ability to hide non-user groups of events e.g. noisy mutations?
 // TODO - P2: ability to have new events in log expanded by default?
-// TODO - P2: pick item with mouse, draw bounds rects
+// TODO - P2: pick item with mouse, draw bounds rects, hit testing
 // TODO - P2: In app, ability to choose root, e.g. desktop vs specific window
 // TODO - P3: Choose columns ?
 // TODO - P3: allow function execution with params? Via config file
@@ -50,6 +50,7 @@
 //   - treeChanged event, how is this different from other tree changes?
 //   - getImageData() crashes on some nodes
 //   - Hit inspect button, show same old inspector (ext)
+//   - Shore up build process including adding linting
 //--
 //   - DCHECK failing in ax_enums.cc at end of ToString(AXState)
 //   - In app, for event listening, should we limit it to one window at a time?
@@ -57,7 +58,6 @@
 //   - domQuerySelector -> domQuerySelectorAll
 //   - Window hierarchy contents repeat what's in rootWebView
 //   - How to draw bounds rects, get element under mouse -- contentscript?
-//   - Why no events on paragraph when I change html attribute?
 //   - Working with fancytree author
 //   - Next steps: get ready for review
 //   - Automation docs: findAll syntax does not work as it is not valid JS:
