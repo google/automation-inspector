@@ -61,6 +61,9 @@ module.exports = function(grunt) {
         ]
       }
     },
+    eslint: {
+      target: ['js/**/*.js']
+    },
     watch: {
       // TODO split into separate watch tasks for app/extension,
       // but it doesn't really matter, may as well do everything on any change
@@ -93,9 +96,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-bower');
+  grunt.loadNpmTasks('grunt-eslint');
 
   grunt.registerTask('app', ['copy:app', 'bower:app']);
   grunt.registerTask('extension', ['copy:extension', 'bower:extension']);
-  grunt.registerTask('default', ['clean', 'extension', 'app']);
+  grunt.registerTask('default', ['eslint', 'clean', 'extension', 'app']);
 
 };
