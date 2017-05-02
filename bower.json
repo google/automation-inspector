@@ -1,0 +1,28 @@
+{
+  "name": "automation-inspector",
+  "description": "Inspection app for Chrome Automation API",
+  "main": "build/app/manifest.json",
+  "authors": [
+    "Aaron Leventhal"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "Chrome",
+    "automation",
+    "accessibility"
+  ],
+  "homepage": "https://github.com/aleventhal/automation-inspector",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1",
+    "fancytree": "^2.22.2"
+  }
+}

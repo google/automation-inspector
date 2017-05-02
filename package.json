@@ -1,0 +1,28 @@
+{
+  "name": "automation-inspector",
+  "version": "0.0.1",
+  "description": "Inspection tool for Chrome Automation API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall" : "node_modules/.bin/bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aleventhal/automation-inspector.git"
+  },
+  "author": "Aaron Leventhal",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "eslint-plugin-jquery": "^1.1.1",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-eslint": "^19.0.0"
+  },
+  "dependencies": {
+    "grunt-bower": "^0.21.4"
+  }
+}
