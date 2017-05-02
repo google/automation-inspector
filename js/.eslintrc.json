@@ -4,7 +4,8 @@
     },
     "globals": {
         "chrome": true,
-        "console": true
+        "console": true,
+        "URL": true
     },
     "extends": "eslint:recommended",
     "rules": {
