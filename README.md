@@ -35,7 +35,11 @@ then install Automation Inspector as an extension (insert link here).
 ## Development
 
 ### Building
-Type the following from the command line in the automation-inspector folder:
+The first time you build, do an ```npm install```
+This will automatically run ```bower install``` for you.
+If you want to update the dependencies, use ```npm update && bower update```
+
+Next, type the following from the command line in the automation-inspector folder:
 ```grunt```
 to build once, or:
 ```grunt default watch```
