@@ -37,7 +37,7 @@ class EventTree extends Tree {
     this.MAX_LOG_GROUPS = 100;
     this.logCounter = 0;
 
-    const EXTENSIONS = ['filter', 'table'];
+    const EXTENSIONS = ['filter', 'table', 'ariagrid'];
     const CONTAINER_ID = '#event-treegrid';
     const $container = $(CONTAINER_ID);
     const treeOptions = $.extend(this.DEFAULT_TREE_OPTIONS, {

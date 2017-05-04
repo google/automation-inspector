@@ -24,7 +24,7 @@ class NodeTree extends Tree {
     this.ID_PREFIX = 'nd_';
     this.ERROR_NO_DATA = 'Error: no data';
 
-    const EXTENSIONS = ['filter', 'table'];
+    const EXTENSIONS = ['filter', 'table', 'ariagrid'];
     const CONTAINER_ID = '#node-treegrid';
     const $container = $(CONTAINER_ID);
     const treeOptions = $.extend(this.DEFAULT_TREE_OPTIONS, {
