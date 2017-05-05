@@ -37,7 +37,7 @@ class Client {
 
   onError(err) {
     console.error(JSON.stringify(err));
-    window.alert(JSON.stringify(err));
+    window.alert('Error: ' + JSON.stringify(err));
   }
 
   // A number for a known tab id (extension) or null

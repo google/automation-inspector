@@ -35,6 +35,7 @@ module.exports = function(grunt) {
           'dist/src/jquery.fancytree.js',
           'dist/src/jquery.fancytree.filter.js',
           'dist/src/jquery.fancytree.table.js',
+          'dist/src/jquery.fancytree.ariagrid.js',
           'dist/skin-win8/ui.fancytree.css',
           'dist/skin-win8/*.gif',
         ]
@@ -59,6 +60,24 @@ module.exports = function(grunt) {
           { src: 'js/extension/*.js', dest: 'build/extension/' },
           { src: ['extension/manifest.json'], dest: 'build/' },
         ]
+      }
+    },
+    modify_json: {
+      options: {
+        fields: {
+          version: '<%= pkg.version %>'
+        },
+        indent: 2
+      },
+      app: {
+        files: {
+          "build/app": ['build/app/manifest.json']
+        }
+      },
+      extension: {
+        files: {
+          "build/extension": ['build/extension/manifest.json']
+        }
       }
     },
     eslint: {
@@ -116,9 +135,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-modify-json');
 
-  grunt.registerTask('app', ['copy:app', 'bower:app']);
-  grunt.registerTask('extension', ['copy:extension', 'bower:extension']);
+  grunt.registerTask('app', ['copy:app', 'modify_json:app', 'bower:app']);
+  grunt.registerTask('extension', 
+    ['copy:extension', 'modify_json:extension', 'bower:extension']);
   grunt.registerTask('package', ['compress:extension', 'compress:app']);
   grunt.registerTask('default', ['eslint', 'clean', 'extension', 'app']);
 

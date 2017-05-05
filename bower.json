@@ -23,6 +23,6 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",
-    "fancytree": "^2.22.2"
+    "fancytree": "^2.22.3"
   }
 }
