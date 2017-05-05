@@ -64,6 +64,24 @@ module.exports = function(grunt) {
     eslint: {
       target: ['js/**/*.js']
     },
+    compress: {
+      app: {
+        options: {
+          archive: 'build/package/app.zip'
+        },
+        files: [
+          { src: ['./**/*'], cwd:'build/app', expand: true, dest: '' }
+        ],
+      },
+      extension: {
+        options: {
+          archive: 'build/package/extension.zip'
+        },
+        files: [
+          { src: ['./**/*'], cwd:'build/extension', expand: true, dest: '' }
+        ],
+      }
+    },
     watch: {
       // TODO split into separate watch tasks for app/extension,
       // but it doesn't really matter, may as well do everything on any change
@@ -97,9 +115,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-bower');
   grunt.loadNpmTasks('grunt-eslint');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
   grunt.registerTask('app', ['copy:app', 'bower:app']);
   grunt.registerTask('extension', ['copy:extension', 'bower:extension']);
+  grunt.registerTask('package', ['compress:extension', 'compress:app']);
   grunt.registerTask('default', ['eslint', 'clean', 'extension', 'app']);
 
 };
