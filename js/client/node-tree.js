@@ -98,8 +98,6 @@ class NodeTree extends Tree {
 
     this.finalize($container, treeOptions);
 
-    this.initToolbar();
-
     this.nodeFilter = new NodeFilter();
   }
 
@@ -361,15 +359,6 @@ class NodeTree extends Tree {
 
   getDocumentNodeKey() {
     return this.getViewRootNode().children[0].data.automationData.key;
-  }
-
-  initToolbar() {
-    $('#node-hit-test-button').on('click', (evt) => {
-      const $btn = $(evt.target);
-      const willNowBePressed = $btn.attr('aria-pressed') !== 'true';
-      $btn.attr('aria-pressed', willNowBePressed);
-      window.hitTest.setHitTestingState(willNowBePressed);
-    });
   }
 }
 

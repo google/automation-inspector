@@ -1,3 +1,12 @@
 body {
-  background-color: green !important;
+  /* Temporary, for debugging */
+  background-color: rgba(0, 255, 255, .1) !important;
+}
+
+[automation-hit-test], [automation-hit-test] * {
+  cursor: crosshair !important;
+}
+
+[automation-highlight="true"] {
+  outline: 3px solid orange;
 }

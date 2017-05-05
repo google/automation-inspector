@@ -2,27 +2,44 @@ function onPortDisconnect() {
   console.log('port disconnect');
 }
 
-const onMouseMove = (evt) => {
+function onMouseMove(evt) {
   window.port.postMessage({
     message: 'mousemove',
     x: evt.screenX,
     y: evt.screenY
   });
-};
+}
+
+function onClick(evt) {
+  window.port.postMessage({
+    message: 'click'
+  });
+  setHitTestingEnabled(false);
+  evt.stopPropagation();
+  evt.stopImmediatePropagation();
+}
+
+function setHitTestingEnabled(doEnable) {
+  if (Boolean(this.isHitTestingEnabled) === doEnable) {
+    return;
+  }
+  this.isHitTestingEnabled = doEnable;
+  if (doEnable) {
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('click', onClick, true);
+    document.documentElement.setAttribute('automation-hit-test', 'true');
+  }
+  else {
+    window.removeEventListener('mousemove', onMouseMove, { passive: true });
+    window.removeEventListener('click', onClick, true);
+    document.documentElement.removeAttribute('automation-hit-test');
+  }
+}
 
 function onPortMessage(event) {
 
   if (event.message === 'setHitTestingEnabled') {
-    if (Boolean(this.isHitTestingEnabled) === event.doEnable) {
-      return;
-    }
-    this.isHitTestingEnabled = event.doEnable;
-    if (event.doEnable) {
-      window.addEventListener('mousemove', onMouseMove, { passive: true });
-    }
-    else {
-      window.removeEventListener('mousemove', onMouseMove, { passive: true });
-    }
+    setHitTestingEnabled(event.doEnable);
   }
 }
 

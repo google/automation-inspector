@@ -22,6 +22,15 @@ class HitTest {
     this.tabPort = chrome.tabs.connect(window.client.getTab(), {
       name: 'automation-inspector'
     });
+    $(document).ready(() => this.initButton());
+  }
+
+  initButton() {
+    this.$button = $('#node-hit-test-button');
+    this.$button.on('click', () => {
+      const willNowBePressed = this.$button.attr('aria-pressed') !== 'true';
+      this.setHitTestingState(willNowBePressed);
+    });
   }
 
   setHitTestingState(doEnable) {
@@ -29,16 +38,29 @@ class HitTest {
       return;
     }
     this.isEnabled = doEnable;
+    this.$button.attr('aria-pressed', doEnable);
 
-    const onMouseMove = (event) => {
+    const onMouseEvent = (event) => {
       console.log(event);
+      if (event.message === 'mousemove') {
+        const functionCallParams = {
+          type: 'call',
+          key: window.nodeTree.getDocumentNodeKey(),
+          functionName: 'hitTest',
+          props: [ event.x, event.y, 'mouseMoved' ]
+        };
+        window.client.sendMessage(functionCallParams);
+      }
+      else if (event.message === 'click') {
+        this.setHitTestingState(false);
+      }
     };
 
     if (doEnable) {
-      this.tabPort.onMessage.addListener(onMouseMove);
+      this.tabPort.onMessage.addListener(onMouseEvent);
     }
     else {
-      this.tabPort.onMessage.removeListener(onMouseMove);
+      this.tabPort.onMessage.removeListener(onMouseEvent);
     }
     this.tabPort.postMessage({
       message: 'setHitTestingEnabled',
