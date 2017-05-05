@@ -21,7 +21,8 @@
     "grunt-contrib-compress": "^1.4.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-eslint": "^19.0.0"
+    "grunt-eslint": "^19.0.0",
+    "grunt-modify-json": "^0.1.3"
   },
   "dependencies": {
     "grunt-bower": "^0.21.4"
