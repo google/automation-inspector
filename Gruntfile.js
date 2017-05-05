@@ -35,6 +35,7 @@ module.exports = function(grunt) {
           'dist/src/jquery.fancytree.js',
           'dist/src/jquery.fancytree.filter.js',
           'dist/src/jquery.fancytree.table.js',
+          'dist/src/jquery.fancytree.ariagrid.js',
           'dist/skin-win8/ui.fancytree.css',
           'dist/skin-win8/*.gif',
         ]
