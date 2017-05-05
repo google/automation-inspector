@@ -47,7 +47,7 @@ class EventTree extends Tree {
         cellFocus: 'allow', // Can also be start or force
         extendedMode: false,
         label: 'Node tree'
-      },      
+      },
       source: [ ],  // No events yet
       // Use only in treegrid mode
       renderColumns: (event, data) => this.renderColumns(data.node),
@@ -283,8 +283,8 @@ class EventTree extends Tree {
       'menuPopupStart': 2,
       'menuStart': 2,
       'mouseCanceled' : 1.2,
-      'mouseDragged': 1.2,
-      'mouseMoved': 1.2,
+      'mouseDragged': 1.21,
+      'mouseMoved': 1.21,
       'mousePressed': 1.2,
       'mouseReleased': 1.2,
       'rowCollapsed': 2,

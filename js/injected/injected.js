@@ -2,21 +2,17 @@ function onPortDisconnect() {
   console.log('port disconnect');
 }
 
-function onMouseMove(evt) {
+function sendEventMessage(evt) {
   window.port.postMessage({
-    message: 'mousemove',
+    message: evt.type,
     x: evt.screenX,
     y: evt.screenY
   });
 }
 
-function onClick(evt) {
-  window.port.postMessage({
-    message: 'click'
-  });
+function onMouseDown(evt) {
+  sendEventMessage(evt);
   setHitTestingEnabled(false);
-  evt.stopPropagation();
-  evt.stopImmediatePropagation();
 }
 
 function setHitTestingEnabled(doEnable) {
@@ -25,13 +21,13 @@ function setHitTestingEnabled(doEnable) {
   }
   this.isHitTestingEnabled = doEnable;
   if (doEnable) {
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
-    window.addEventListener('click', onClick, true);
+    window.addEventListener('mousemove', sendEventMessage, { passive: true });
+    window.addEventListener('mousedown', onMouseDown, true);
     document.documentElement.setAttribute('automation-hit-test', 'true');
   }
   else {
-    window.removeEventListener('mousemove', onMouseMove, { passive: true });
-    window.removeEventListener('click', onClick, true);
+    window.removeEventListener('mousemove', sendEventMessage, { passive: true });
+    window.removeEventListener('mousedown', onMouseDown, true);
     document.documentElement.removeAttribute('automation-hit-test');
   }
 }

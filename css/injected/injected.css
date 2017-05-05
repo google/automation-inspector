@@ -5,6 +5,8 @@ body {
 
 [automation-hit-test], [automation-hit-test] * {
   cursor: crosshair !important;
+   /* During a hit test, do not allow clicks to do anything. Freeze the page */
+  pointer-events: none !important;
 }
 
 [automation-highlight="true"] {

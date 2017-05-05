@@ -41,19 +41,18 @@ class HitTest {
     this.$button.attr('aria-pressed', doEnable);
 
     const onMouseEvent = (event) => {
-      console.log(event);
-      if (event.message === 'mousemove') {
-        const functionCallParams = {
-          type: 'call',
-          key: window.nodeTree.getDocumentNodeKey(),
-          functionName: 'hitTest',
-          props: [ event.x, event.y, 'mouseMoved' ]
-        };
-        window.client.sendMessage(functionCallParams);
-      }
-      else if (event.message === 'click') {
+      let fnName = 'mouseMoved';
+      if (event.message === 'mousedown') {
         this.setHitTestingState(false);
+        fnName = 'mousePressed';
       }
+      const functionCallParams = {
+        type: 'call',
+        key: window.nodeTree.getDocumentNodeKey(),
+        functionName: 'hitTest',
+        props: [ event.x, event.y, fnName ]
+      };
+      window.client.sendMessage(functionCallParams);
     };
 
     if (doEnable) {
