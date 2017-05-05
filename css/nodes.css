@@ -23,6 +23,10 @@
   left: 2px;
 }
 
+#node-hit-test-button[aria-pressed="true"] {
+  background-color: orange;
+}
+
 #node-filter-input {
   width: 50ch;
 }

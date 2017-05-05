@@ -25,7 +25,7 @@ class Client {
     window.addEventListener('unhandledrejection', this.onError);
 
     // Connect to automation server so that we can listen to events
-    this.port = chrome.runtime.connect( {
+    this.serverPort = chrome.runtime.connect( {
       // We can only provide arguments to connect in the name string
       name: 'automation-inspector' + ':' + this.getTab()
     });
@@ -64,7 +64,7 @@ class Client {
 
   addPortListener(message, callback) {
     if (!this.portListenerCallbacks) {
-      this.port.onMessage.addListener((event) => {
+      this.serverPort.onMessage.addListener((event) => {
         console.assert(event.tab === this.getTab());
         const callback = this.portListenerCallbacks[event.message];
         console.assert(callback);

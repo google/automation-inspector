@@ -21,6 +21,15 @@
 // Try to find and activate existing inspector for the current tab,
 // or create one if it doesn't already exist
 chrome.browserAction.onClicked.addListener((tab) => {
+  chrome.tabs.insertCSS(null, {
+    allFrames: true,
+    file: 'css/injected/injected.css'
+  });
+  chrome.tabs.executeScript(null, {
+    allFrames: true,
+    file: 'js/injected/injected.js'
+  });
+
   const url = getInspectorUrl(tab);
   chrome.tabs.query({url}, (result) => {
     if (result && result.length) {

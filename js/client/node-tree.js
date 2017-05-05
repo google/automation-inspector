@@ -34,7 +34,7 @@ class NodeTree extends Tree {
         cellFocus: 'allow', // Can also be start or force
         extendedMode: false,
         label: 'Node tree'
-      },      
+      },
       source: [ rootAutomationNode ].map((node) => this.toTreeData(node) ),
       lazyLoad: (event, data) => {
         const node = data.node;
@@ -97,6 +97,8 @@ class NodeTree extends Tree {
     treeOptions.filter.autoApply = false;
 
     this.finalize($container, treeOptions);
+
+    this.initToolbar();
 
     this.nodeFilter = new NodeFilter();
   }
@@ -359,6 +361,15 @@ class NodeTree extends Tree {
 
   getDocumentNodeKey() {
     return this.getViewRootNode().children[0].data.automationData.key;
+  }
+
+  initToolbar() {
+    $('#node-hit-test-button').on('click', (evt) => {
+      const $btn = $(evt.target);
+      const willNowBePressed = $btn.attr('aria-pressed') !== 'true';
+      $btn.attr('aria-pressed', willNowBePressed);
+      window.hitTest.setHitTestingState(willNowBePressed);
+    });
   }
 }
 

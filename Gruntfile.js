@@ -24,6 +24,7 @@ module.exports = function(grunt) {
     'css/**/*',
     'js/server/**/*',
     'js/client/**/*',
+    'js/injected/**/*',
     'images/**/*'
   ];
 
@@ -138,7 +139,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-modify-json');
 
   grunt.registerTask('app', ['copy:app', 'modify_json:app', 'bower:app']);
-  grunt.registerTask('extension', 
+  grunt.registerTask('extension',
     ['copy:extension', 'modify_json:extension', 'bower:extension']);
   grunt.registerTask('package', ['compress:extension', 'compress:app']);
   grunt.registerTask('default', ['eslint', 'clean', 'extension', 'app']);
