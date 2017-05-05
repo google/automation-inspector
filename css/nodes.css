@@ -17,6 +17,12 @@
 
 /* Styling for the treeiew of nodes */
 
+#node-hit-test-button {
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
+
 #node-filter-input {
   width: 50ch;
 }

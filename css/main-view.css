@@ -145,7 +145,7 @@ table.fancytree-cell-mode > tbody > tr.fancytree-active > td {
 table.fancytree-cell-mode > tbody > tr > td.fancytree-active-cell {
   background-color: #cbe8f6;
 }
-table.fancytree-cell-mode.fancytree-cell-nav-mode > tbody > tr > 
+table.fancytree-cell-mode.fancytree-cell-nav-mode > tbody > tr >
   td.fancytree-active-cell {
   background-color: #cbe8f6;
 }

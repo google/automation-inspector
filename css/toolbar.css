@@ -18,9 +18,18 @@
  /* Styling for the toolbars */
 
 .toolbar {
-  height: 20px;
+  height: 22px;
   width: 100%;
   background-color: #eee;
   margin-bottom: 5px;
   white-space: nowrap;
+}
+
+button, input[type="checkbox"] {
+  cursor: pointer;
+}
+
+#node-filter-control {
+  position: relative;
+  top: -1px;
 }
