@@ -2,17 +2,27 @@ function onPortDisconnect() {
   console.log('port disconnect');
 }
 
-function sendEventMessage(evt) {
+function sendEventMessage(type, evt) {
   window.port.postMessage({
-    message: evt.type,
-    x: evt.screenX,
-    y: evt.screenY
+    message: type,
+    x: evt && evt.screenX,
+    y: evt && evt.screenY
   });
 }
 
+function onMouseMove(evt) {
+  sendEventMessage('mouseMoved', evt);
+}
+
 function onMouseDown(evt) {
-  sendEventMessage(evt);
+  sendEventMessage('mousePressed', evt);
   setHitTestingEnabled(false);
+}
+
+function onKeyDown(evt) {
+  if (evt.key === 'Escape') {
+    sendEventMessage('mouseCancelled');
+  }
 }
 
 function setHitTestingEnabled(doEnable) {
@@ -21,13 +31,15 @@ function setHitTestingEnabled(doEnable) {
   }
   this.isHitTestingEnabled = doEnable;
   if (doEnable) {
-    window.addEventListener('mousemove', sendEventMessage, { passive: true });
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
     window.addEventListener('mousedown', onMouseDown, true);
+    window.addEventListener('keydown', onKeyDown);
     document.documentElement.setAttribute('automation-hit-test', 'true');
   }
   else {
-    window.removeEventListener('mousemove', sendEventMessage, { passive: true });
+    window.removeEventListener('mousemove', onMouseMove, { passive: true });
     window.removeEventListener('mousedown', onMouseDown, true);
+    window.removeEventListener('keydown', onKeyDown);
     document.documentElement.removeAttribute('automation-hit-test');
   }
 }

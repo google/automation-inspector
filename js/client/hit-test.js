@@ -40,26 +40,28 @@ class HitTest {
     this.isEnabled = doEnable;
     this.$button.attr('aria-pressed', doEnable);
 
-    const onMouseEvent = (event) => {
-      let fnName = 'mouseMoved';
-      if (event.message === 'mousedown') {
+    const onMessage = (event) => {
+      if (event.message === 'mouseCancelled') {
         this.setHitTestingState(false);
-        fnName = 'mousePressed';
+        return;
+      }
+      if (event.message === 'mousePressed') {
+        this.setHitTestingState(false);
       }
       const functionCallParams = {
         type: 'call',
         key: window.nodeTree.getDocumentNodeKey(),
         functionName: 'hitTest',
-        props: [ event.x, event.y, fnName ]
+        props: [ event.x, event.y, event.message ]
       };
       window.client.sendMessage(functionCallParams);
     };
 
     if (doEnable) {
-      this.tabPort.onMessage.addListener(onMouseEvent);
+      this.tabPort.onMessage.addListener(onMessage);
     }
     else {
-      this.tabPort.onMessage.removeListener(onMouseEvent);
+      this.tabPort.onMessage.removeListener(onMessage);
     }
     this.tabPort.postMessage({
       message: 'setHitTestingEnabled',
