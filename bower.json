@@ -11,7 +11,7 @@
     "automation",
     "accessibility"
   ],
-  "homepage": "https://github.com/aleventhal/automation-inspector",
+  "homepage": "https://github.com/google/automation-inspector",
   "private": true,
   "ignore": [
     "**/.*",
