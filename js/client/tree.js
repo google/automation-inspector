@@ -100,6 +100,16 @@ class Tree {
   finalize($container, treeOptions) {
     this.$container = $container;
 
+    $container.on('focus', () => {
+      // We like the focused and active node to be the same
+      setTimeout(() => {
+        const focusNode = this.tree.getFocusNode();
+        if (focusNode) {
+          focusNode.setActive();
+        }
+      }, 0);
+    });
+
     // Prepare size and handle window resizing
     this.onResize($container);
     $(window).on('resize', () => { this.onResize(); });
