@@ -30,6 +30,11 @@ class NodeTree extends Tree {
     const treeOptions = $.extend(this.DEFAULT_TREE_OPTIONS, {
       idPrefix: this.ID_PREFIX,
       extensions: EXTENSIONS, // Column view makes things easier to read
+      ariagrid: {
+        cellFocus: 'allow', // Can also be start or force
+        extendedMode: false,
+        label: 'Node tree'
+      },      
       source: [ rootAutomationNode ].map((node) => this.toTreeData(node) ),
       lazyLoad: (event, data) => {
         const node = data.node;

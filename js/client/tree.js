@@ -61,11 +61,6 @@ class Tree {
         nodata: true,      // Display a 'no data' status node if result is empty
         mode: 'hide'      // Grayout unmatched nodes (pass "hide" to remove unmatched node instead)
       },
-      ariagrid: {
-        cellFocus: 'allow', // Can also be start or force
-        extendedMode: false,
-        label: undefined // TBD
-      },
       focusOnSelect: false, // Set focus when node is checked by a mouse click
       escapeTitles: false, // Escape `node.title` content for display
       generateIds: true, // Generate id attributes like <span id='fancytree-id-KEY'>

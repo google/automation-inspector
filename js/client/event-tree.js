@@ -43,6 +43,11 @@ class EventTree extends Tree {
     const treeOptions = $.extend(this.DEFAULT_TREE_OPTIONS, {
       idPrefix: this.ID_PREFIX,
       extensions: EXTENSIONS, // Column view makes things easier to read
+      ariagrid: {
+        cellFocus: 'allow', // Can also be start or force
+        extendedMode: false,
+        label: 'Node tree'
+      },      
       source: [ ],  // No events yet
       // Use only in treegrid mode
       renderColumns: (event, data) => this.renderColumns(data.node),
