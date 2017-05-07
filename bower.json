@@ -23,6 +23,6 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",
-    "fancytree": "git://github.com/aleventhal/fancytree#dist"
+    "fancytree": "git://github.com/aleventhal/fancytree#fix-chrome-names"
   }
 }
