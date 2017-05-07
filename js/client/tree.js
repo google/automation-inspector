@@ -74,6 +74,15 @@ class Tree {
       tabindex: '0', // Whole tree behaves as one single control
       titlesTabbable: false, // Node titles can receive keyboard focus
       tooltip: false, // Use title as tooltip (also a callback could be specified)
+      focusTree: (event, data) => {
+        const tree = data.tree;
+        if (!tree.getFocusNode()) {
+          const firstVisible = tree.rootNode.getFirstChild();
+          if (firstVisible) {
+            firstVisible.setActive();
+          }
+        }
+      }
     };
 
     const onDocumentReady = () => {
@@ -94,16 +103,6 @@ class Tree {
 
   finalize($container, treeOptions) {
     this.$container = $container;
-
-    $container.on('focus', () => {
-      // We like the focused and active node to be the same
-      setTimeout(() => {
-        const focusNode = this.tree.getFocusNode();
-        if (focusNode) {
-          focusNode.setActive();
-        }
-      }, 0);
-    });
 
     // Prepare size and handle window resizing
     this.onResize($container);
@@ -133,7 +132,7 @@ class Tree {
   // This is the invisible root node of the tree widget implementation,
   // currently implemented by FancyTree
   getViewRootNode() {
-    return this.tree.rootNode;
+    return this.tree && this.tree.rootNode;
   }
 
   filter(filterFn, opts) {

@@ -233,7 +233,11 @@ class EventTree extends Tree {
   // Using selection mechnism to colorize related events ot given
   // automation node
   selectAllEventsForAutomationNode(automationNodeKey) {
-    this.getViewRootNode().visit((eventNode) => {
+    const rootNode = this.getViewRootNode();
+    if (!rootNode) {
+      return;
+    }
+    rootNode.visit((eventNode) => {
       const eventData = eventNode.data.automationData;
       eventNode.setSelected(eventData && !eventData.isSummary &&
         eventData.node.key === automationNodeKey);

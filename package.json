@@ -1,6 +1,6 @@
 {
   "name": "automation-inspector",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Inspection tool for Chrome Automation API",
   "main": "index.js",
   "scripts": {
