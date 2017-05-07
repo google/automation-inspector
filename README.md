@@ -50,6 +50,14 @@ Using developer mode from the Chrome extensions page at ```chrome://extensions``
 use the load unpacked extension feature, pointing it at the
 ```build/extension``` folder.
 
+### Releasing
+
+Update the version number via:
+`npm version patch`, `npm version minor` or `npm version major`
+and
+`grunt default compress` to create app.zip and extension.zip for uploading to 
+the Chrome web store in the `build/package` folder.
+
 ## Usage tips
 
 ### Finding a node

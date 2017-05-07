@@ -1,7 +1,7 @@
 {
   "name": "Automation Inspector (App)",
   "description": "Developer tool for exercising the Chrome Automation API",
-  "version": "0.1.5",
+  "version": "__VERSION__",
   "manifest_version": 2,
   "app": {
     "background": {
@@ -18,5 +18,7 @@
   "automation": {
     "desktop": true
   },
-  "icons": {  "128": "images/inspect-icon-128.png" }
+  "icons": {
+    "128": "images/inspect-icon-128.png"
+  }
 }

@@ -97,8 +97,8 @@ fieldset {
 }
 /* Remove extra confusing outlines when item doesn't have focus */
 .fancytree-ext-table:not(:focus) > tbody > .fancytree-active,
-.fancytree-ext-table:not(:focus) > tbody > .fancytree-active > td,
-.fancytree-ext-table:not(:focus) > tbody > .fancytree-active > td span
+.fancytree-ext-table td,
+.fancytree-ext-table td span
 {
   outline: 0 !important;
 }
@@ -135,4 +135,17 @@ fieldset {
 
 .fancytree-match .fancytree-title {
   font-weight: normal !important;
+}
+
+/* --- ext-ariagrid specific ---------------------------------------- */
+table.fancytree-cell-mode > tbody > tr.fancytree-active > td {
+  /*background-color: #cbe8f6;*/
+  background-color: #f4f4f4;
+}
+table.fancytree-cell-mode > tbody > tr > td.fancytree-active-cell {
+  background-color: #cbe8f6;
+}
+table.fancytree-cell-mode.fancytree-cell-nav-mode > tbody > tr > 
+  td.fancytree-active-cell {
+  background-color: #cbe8f6;
 }

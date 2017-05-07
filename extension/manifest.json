@@ -1,7 +1,7 @@
 {
   "name": "Automation Inspector (Extension)",
   "description": "Developer tool for exercising the Chrome Automation API",
-  "version": "0.1.5",
+  "version": "__VERSION__",
   "manifest_version": 2,
   "browser_action": {
     "default_icon": "images/inspect-icon-128.png"
@@ -20,5 +20,7 @@
       "js/extension/launch-tab.js"
     ]
   },
-  "icons": {  "128": "images/inspect-icon-128.png" }
+  "icons": {
+    "128": "images/inspect-icon-128.png"
+  }
 }

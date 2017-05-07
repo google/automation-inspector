@@ -37,12 +37,17 @@ class EventTree extends Tree {
     this.MAX_LOG_GROUPS = 100;
     this.logCounter = 0;
 
-    const EXTENSIONS = ['filter', 'table'];
+    const EXTENSIONS = ['filter', 'table', 'ariagrid'];
     const CONTAINER_ID = '#event-treegrid';
     const $container = $(CONTAINER_ID);
     const treeOptions = $.extend(this.DEFAULT_TREE_OPTIONS, {
       idPrefix: this.ID_PREFIX,
       extensions: EXTENSIONS, // Column view makes things easier to read
+      ariagrid: {
+        cellFocus: 'allow', // Can also be start or force
+        extendedMode: false,
+        label: 'Node tree'
+      },      
       source: [ ],  // No events yet
       // Use only in treegrid mode
       renderColumns: (event, data) => this.renderColumns(data.node),
@@ -228,7 +233,11 @@ class EventTree extends Tree {
   // Using selection mechnism to colorize related events ot given
   // automation node
   selectAllEventsForAutomationNode(automationNodeKey) {
-    this.getViewRootNode().visit((eventNode) => {
+    const rootNode = this.getViewRootNode();
+    if (!rootNode) {
+      return;
+    }
+    rootNode.visit((eventNode) => {
       const eventData = eventNode.data.automationData;
       eventNode.setSelected(eventData && !eventData.isSummary &&
         eventData.node.key === automationNodeKey);

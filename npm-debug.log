@@ -1,0 +1,49 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'version',
+1 verbose cli   'patch' ]
+2 info using npm@3.10.10
+3 info using node@v6.10.3
+4 info git [ 'status', '--porcelain' ]
+5 verbose stack Error: Git working directory not clean.
+5 verbose stack M  Gruntfile.js
+5 verbose stack M  README.md
+5 verbose stack UU app/manifest.json
+5 verbose stack M  bower.json
+5 verbose stack M  css/main-view.css
+5 verbose stack UU extension/manifest.json
+5 verbose stack M  html/main-view.html
+5 verbose stack M  js/client/client.js
+5 verbose stack M  js/client/event-tree.js
+5 verbose stack M  js/client/node-tree.js
+5 verbose stack M  js/client/tree.js
+5 verbose stack UU package.json
+5 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\version.js:247:19
+5 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\utils\no-progress-while-running.js:21:8
+5 verbose stack     at ChildProcess.exithandler (child_process.js:195:7)
+5 verbose stack     at emitTwo (events.js:106:13)
+5 verbose stack     at ChildProcess.emit (events.js:191:7)
+5 verbose stack     at maybeClose (internal/child_process.js:886:16)
+5 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+6 verbose cwd C:\Users\aleventhal\proj\goog\automation-inspector
+7 error Windows_NT 10.0.10586
+8 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "version" "patch"
+9 error node v6.10.3
+10 error npm  v3.10.10
+11 error Git working directory not clean.
+11 error M  Gruntfile.js
+11 error M  README.md
+11 error UU app/manifest.json
+11 error M  bower.json
+11 error M  css/main-view.css
+11 error UU extension/manifest.json
+11 error M  html/main-view.html
+11 error M  js/client/client.js
+11 error M  js/client/event-tree.js
+11 error M  js/client/node-tree.js
+11 error M  js/client/tree.js
+11 error UU package.json
+12 error If you need help, you may report this error at:
+12 error     <https://github.com/npm/npm/issues>
+13 verbose exit [ 1, true ]

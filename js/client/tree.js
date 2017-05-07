@@ -20,48 +20,16 @@
   * NodeTree, EventTree and PropsTree
   */
 
-// TODO - perf work on
-//        https://cs.chromium.org/chromium/src/ui/accessibility/ax_node_data.cc
-// TODO - screen reader access,
-//      - label for whole row aria-level, posinset, setsize, aria-expanded,
-//        aria-owns, no aria-labelledby, no role="treeitem" in treegrid case
-//      - leave off aria-selected compeltely when stuff is not selectable.
-//      - aria-activedescendant point to row
-// TODO - In desktop/app mode, ability to limit to a specific root
-// TODO - P2: Plain text search and regex search can be done via findAll
-// TODO - P2: resizable panels ala https://codepen.io/rstrahl/pen/eJZQej
-// TODO - P2: ability to hide non-user groups of events e.g. noisy mutations?
-// TODO - P2: ability to have new events in log expanded by default?
-// TODO - P2: pick item with mouse, draw bounds rects, hit testing
-// TODO - P2: In app, ability to choose root, e.g. desktop vs specific window
-// TODO - P3: Choose columns ?
-// TODO - P3: allow function execution with params? Via config file
-// TODO - P3: Highlights don't work unless we knew about nodeChanged node before
-// TODO - P3: remote access
-// TODO - P3: expose internal id's (would need to add field to AutomationNode)
-// TODO - P4: all searches should be done by background script, passing back
-//            keys, perhaps using alterations to the automation API
-// TODO - P4: allow JSON to be constructed via options dialog
-// TODO - P4: put all config options in JSON
 // Qs:
-//   - htmlTag not working
 //   - Why isn't source=user happening for every click event
-//   - textChanged event, why both event and treeChange?
-//   - treeChanged event, how is this different from other tree changes?
-//   - getImageData() crashes on some nodes
-//   - Hit inspect button, show same old inspector (ext)
-//   - Shore up build process including adding linting
 //--
 //   - DCHECK failing in ax_enums.cc at end of ToString(AXState)
-//   - In app, for event listening, should we limit it to one window at a time?
-//     Have a window chooser?
-//   - domQuerySelector -> domQuerySelectorAll
-//   - Window hierarchy contents repeat what's in rootWebView
-//   - How to draw bounds rects, get element under mouse -- contentscript?
-//   - Working with fancytree author
-//   - Next steps: get ready for review
-//   - Automation docs: findAll syntax does not work as it is not valid JS:
-//     { StateType.disabled: false }
+//   - Automation docs:
+//   - textChanged event, why both event and treeChange?
+//   - treeChanged event, how is this different from other tree changes?
+//      - findAll syntax does not work as it is not valid JS:
+//       { StateType.disabled: false }
+//      - Some methods use callbacks -- should be documented
 //   - Cannot find sub-objects with find/findAll, e.g. htmlAttributes ala:
 //     tree.rootNode.findAll({ attributes: {"htmlAttributes": {"id": "foo"}}})
 
@@ -106,6 +74,15 @@ class Tree {
       tabindex: '0', // Whole tree behaves as one single control
       titlesTabbable: false, // Node titles can receive keyboard focus
       tooltip: false, // Use title as tooltip (also a callback could be specified)
+      focusTree: (event, data) => {
+        const tree = data.tree;
+        if (!tree.getFocusNode()) {
+          const firstVisible = tree.rootNode.getFirstChild();
+          if (firstVisible) {
+            firstVisible.setActive();
+          }
+        }
+      }
     };
 
     const onDocumentReady = () => {
@@ -155,7 +132,7 @@ class Tree {
   // This is the invisible root node of the tree widget implementation,
   // currently implemented by FancyTree
   getViewRootNode() {
-    return this.tree.rootNode;
+    return this.tree && this.tree.rootNode;
   }
 
   filter(filterFn, opts) {
