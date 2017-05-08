@@ -1,9 +1,11 @@
+let port;
+
 function onPortDisconnect() {
   console.log('port disconnect');
 }
 
 function sendEventMessage(type, evt) {
-  window.port.postMessage({
+  port.postMessage({
     message: type,
     x: evt && evt.screenX,
     y: evt && evt.screenY
@@ -51,13 +53,13 @@ function onPortMessage(event) {
   }
 }
 
-chrome.runtime.onConnect.addListener((port) => {
+chrome.runtime.onConnect.addListener((newPort) => {
   if (chrome.runtime.lastError) {
     console.error(chrome.runtime.lastError);
     return;
   }
 
-  window.port = port;
+  port = newPort;
 
   port.onDisconnect.addListener(onPortDisconnect);
   port.onMessage.addListener(onPortMessage);
