@@ -83,7 +83,7 @@ class Client {
         if (chrome.runtime.lastError) {
           throw new Error(JSON.stringify(chrome.runtime.lastError));
         }
-        if (result.error) {
+        if (result && result.error) {
           throw new Error(result.error);
         }
         resolve(result);
