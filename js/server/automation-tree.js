@@ -224,10 +224,13 @@ class AutomationTree {
     // to inspect another inspector (when we're an extension)
     if (!this.tabId && node && node.root) {
       // Check to see if url on root is chrome-extension://[EXTENSION_ID]/*
-      const url = new URL(node.root.docUrl);
-      if (url.protocol === 'chrome-extension:' &&
-        url.hostname === chrome.runtime.id) {
-        return;
+      const docUrl = node.root.docUrl;
+      if (docUrl) {
+        const parsedUrl = new URL(node.root.docUrl);
+        if (parsedUrl.protocol === 'chrome-extension:' &&
+          parsedUrl.hostname === chrome.runtime.id) {
+          return;
+        }
       }
     }
 
