@@ -7,8 +7,8 @@ function onPortDisconnect() {
 function sendEventMessage(type, evt) {
   port.postMessage({
     message: type,
-    x: evt && evt.screenX,
-    y: evt && evt.screenY
+    x: evt && evt.clientX,
+    y: evt && evt.clientY
   });
 }
 
