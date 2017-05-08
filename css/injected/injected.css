@@ -1,8 +1,3 @@
-body {
-  /* Temporary, for debugging */
-  background-color: rgba(0, 255, 255, .1) !important;
-}
-
 [automation-hit-test], [automation-hit-test] * {
   cursor: crosshair !important;
    /* During a hit test, do not allow clicks to do anything. Freeze the page */
