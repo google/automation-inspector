@@ -21,7 +21,7 @@ entire Chrome OS desktop, or to inspect a specific browser tab.
 This tool is mainly useful for the following types of people:
 - Developers/QA working on Chrome accessibility support
 - Developers/QA working on assistive technologies for Chrome OS
-- Developers/QA working on accessibility of web applications looking (less so)
+- Developers/QA working on accessibility of web applications
 
 ## Installation
 
@@ -30,7 +30,7 @@ Chrome OS to the Dev Channel](https://support.google.com/chromebook/answer/10869
 and then install Automation Inspector as an app (insert link here).
 * Chrome tabs: you can inspect individual browser tabs on any OS. To do this,
 [install Google Chrome Canary](https://www.google.com/chrome/browser/canary.html) and
-then install Automation Inspector as an extension (insert link here).
+then install [Automation Inspector extension](https://chrome.google.com/webstore/detail/automation-inspector-exte/magknkflhkbbjaalinnipadaihkbghoc).
 
 ## Development
 
