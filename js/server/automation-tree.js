@@ -292,6 +292,10 @@ class AutomationTree {
 
     const serialize = (from, to, props) => {
       for (let prop of props) { // Get all keys
+        // For unknown reasons, accessing tableCellRowHeaders is breaking the code.
+        // https://github.com/google/automation-inspector/issues/18
+        // TODO: investigate on why it happens.
+        if (prop === 'tableCellRowHeaders') continue;
         const val = from[prop],
           type = typeof val;
 
